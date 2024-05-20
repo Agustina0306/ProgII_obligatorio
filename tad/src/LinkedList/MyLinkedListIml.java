@@ -88,7 +88,11 @@ public class MyLinkedListIml<T> implements MyList<T> {
 
     @Override
     public int size() {
-        return 0;
+        int size = 0;
+        for (Node<T> tempNode = this.firstNode; tempNode != null; ++size) {
+            tempNode = tempNode.getNext();
+        }
+        return size;
     }
 
     @Override
