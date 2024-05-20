@@ -14,6 +14,23 @@ public class TreeNode <K extends Comparable<K>, T> {
         this.rightChild = null;
     }
 
+    public void addInArbol (K key, T value){
+        TreeNode<K,T> newNode = new TreeNode<>(key, value);
+        if (key.compareTo(this.key) > 0 ){
+            if (rightChild == null){
+                rightChild = newNode;
+            } else {
+                rightChild.addInArbol(key, value);
+            }
+        } else{
+            if (leftChild == null){
+                leftChild = newNode;
+            } else {
+                leftChild.addInArbol(key, value);
+            }
+        }
+    }
+
     public K getKey() {
         return key;
     }

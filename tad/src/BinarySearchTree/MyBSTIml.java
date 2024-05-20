@@ -3,9 +3,18 @@ package BinarySearchTree;
 import LinkedList.MyList;
 
 public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree<K,T>{
+    private TreeNode<K,T> root;
+
     @Override
     public void add(K key, T value) {
+        TreeNode<K,T> newNode = new TreeNode<>(key, value);
 
+        if (this.root == null){
+            this.root = newNode;
+        }else{
+
+
+        }
     }
 
     @Override
