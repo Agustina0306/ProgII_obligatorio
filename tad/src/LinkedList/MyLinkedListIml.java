@@ -1,31 +1,30 @@
 package LinkedList;
 
+import Queue.EmptyQueueException;
+import Queue.MyQueue;
 import Stack.EmptyStackException;
 import Stack.MyStack;
 
-public class MyLinkedListIml<T> implements MyList<T> , MyStack<T> {
+public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
 
     private Node<T> firstNode;
-    private Node<T> topNode;
+    private Node<T> lastNode;
 
     public MyLinkedListIml() {
         this.firstNode = null;
-        this.topNode = null;
+        this.lastNode = null;
     }
 
     @Override
-    public void add(T value) {
+    public void add(T value) {  // Agrega elemento al final de la lista
         if (value != null) {
             Node<T> newNode = new Node<>(value);
             if (this.firstNode == null) {
                 this.firstNode = newNode;
+                this.lastNode = newNode;
             } else {
-                Node<T> tempNode = firstNode;
-                while (tempNode.getNext() != null) {
-                    tempNode = tempNode.getNext();
-                }
-                tempNode.setNext(newNode);
-                this.topNode = newNode;
+                this.lastNode.setNext(newNode);
+                this.lastNode = newNode;
             }
         }
     }
@@ -36,10 +35,9 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T> {
         int tempPosition = 0;
         Node<T> tempNode = this.firstNode;
 
-        if (position < 0){
+        if (position < 0 || position >= this.size()){
             throw new DatoInvalido();
         }
-
         while (tempNode != null && tempPosition != position){
             tempNode = tempNode.getNext();
             tempPosition ++;
@@ -72,18 +70,22 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T> {
         }
         if (this.firstNode.getValue().equals(value)){
             this.firstNode = this.firstNode.getNext();
-        } else {
-            Node<T> current = this.firstNode;
-            Node<T> previous = null;
+        }
 
-            while (current != null && !current.getValue().equals(value)){
-                previous = current;
-                current = current.getNext();
-            }
-            if (current != null && previous != null) {
-                previous.setNext(current.getNext());
+        Node<T> current = this.firstNode;
+        Node<T> previous = null;
+
+        while (current != null && !current.getValue().equals(value)){
+            previous = current;
+            current = current.getNext();
+        }
+        if (current != null && previous != null) {
+            previous.setNext(current.getNext());
+            if (current == this.lastNode){
+                this.lastNode = previous;
             }
         }
+
     }
 
     @Override
@@ -121,24 +123,61 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T> {
     public T pop() throws EmptyStackException{
         Node<T> current = firstNode;
         Node<T> popNode = null;
-        if (this.topNode == null) {
+        if (this.lastNode == null) {
             throw new EmptyStackException();
         }
-        while(current.getNext() != this.topNode){
+        if (this.lastNode == this.firstNode){
+            popNode = this.firstNode;
+            this.firstNode = null;
+            this.lastNode = null;
+            return popNode.getValue();
+        }
+        while(current.getNext() != this.lastNode){
             current = current.getNext();
         }
         popNode = current.getNext();
         current.setNext(null);
-        this.topNode = current;
+        this.lastNode = current;
         return popNode.getValue();
     }
 
     @Override
     public T peek() {
         T valueToReturn = null;
-        if (this.topNode != null){
-            valueToReturn = this.topNode.getValue();
+        if (this.lastNode != null){
+            valueToReturn = this.lastNode.getValue();
         }
         return valueToReturn;
+    }
+
+    @Override
+    public void enqueue(T value) {
+        if (value != null){
+            Node<T> newNode = new Node<>(value);
+            if (this.firstNode == null){
+                this.firstNode = newNode;
+                this.lastNode = newNode;
+            } else {
+                newNode.setNext(firstNode);
+                this.firstNode = newNode;
+            }
+        }
+
+    }
+
+    @Override
+    public T dequeue() throws EmptyQueueException {
+        Node<T> current = firstNode;
+        Node<T> deqNode = null;
+        if (this.lastNode == null){
+            throw new EmptyQueueException();
+        }
+        while(current.getNext() != this.lastNode){
+            current = current.getNext();
+        }
+        deqNode = current.getNext();
+        current.setNext(null);
+        this.lastNode = current;
+        return deqNode.getValue();
     }
 }

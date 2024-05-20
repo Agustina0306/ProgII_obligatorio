@@ -1,11 +1,11 @@
 package Queue;
 
 public interface MyQueue<T>{
-    void enqueue(T var1);
+    void enqueue(T value);
 
     T dequeue() throws EmptyQueueException;
 
-    boolean contains(T var1);
+    boolean contains(T value);
 
     int size();
 }
