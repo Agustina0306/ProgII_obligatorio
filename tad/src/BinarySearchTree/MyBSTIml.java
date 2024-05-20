@@ -18,8 +18,6 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
 
     @Override
     public void remove(K key) {
-
-
     }
 
     @Override
