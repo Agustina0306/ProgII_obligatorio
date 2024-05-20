@@ -1,11 +1,16 @@
 package LinkedList;
 
-public class MyLinkedListIml<T> implements MyList<T> {
+import Stack.EmptyStackException;
+import Stack.MyStack;
+
+public class MyLinkedListIml<T> implements MyList<T> , MyStack<T> {
 
     private Node<T> firstNode;
+    private Node<T> topNode;
 
     public MyLinkedListIml() {
         this.firstNode = null;
+        this.topNode = null;
     }
 
     @Override
@@ -20,6 +25,7 @@ public class MyLinkedListIml<T> implements MyList<T> {
                     tempNode = tempNode.getNext();
                 }
                 tempNode.setNext(newNode);
+                this.topNode = newNode;
             }
         }
     }
@@ -61,11 +67,9 @@ public class MyLinkedListIml<T> implements MyList<T> {
         if (value == null){
             throw new DatoInvalido();
         }
-
         if (this.firstNode == null || !this.contains(value)){
             throw new EntidadNoExiste();
         }
-
         if (this.firstNode.getValue().equals(value)){
             this.firstNode = this.firstNode.getNext();
         } else {
@@ -106,5 +110,35 @@ public class MyLinkedListIml<T> implements MyList<T> {
             }
         }
         return null;
+    }
+
+    @Override
+    public void push(T value) {
+        this.add(value);
+    }
+
+    @Override
+    public T pop() throws EmptyStackException{
+        Node<T> current = firstNode;
+        Node<T> popNode = null;
+        if (this.topNode == null) {
+            throw new EmptyStackException();
+        }
+        while(current.getNext() != this.topNode){
+            current = current.getNext();
+        }
+        popNode = current.getNext();
+        current.setNext(null);
+        this.topNode = current;
+        return popNode.getValue();
+    }
+
+    @Override
+    public T peek() {
+        T valueToReturn = null;
+        if (this.topNode != null){
+            valueToReturn = this.topNode.getValue();
+        }
+        return valueToReturn;
     }
 }

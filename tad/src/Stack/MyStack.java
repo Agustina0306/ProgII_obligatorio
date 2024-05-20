@@ -1,7 +1,7 @@
 package Stack;
 
 public interface MyStack <T> {
-    void push(T var1);
+    void push(T value);
 
     T pop() throws EmptyStackException;
 
