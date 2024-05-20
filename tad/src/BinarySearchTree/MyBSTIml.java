@@ -12,13 +12,13 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
         if (this.root == null){
             this.root = newNode;
         }else{
-
-
+            root.addInArbol(key, value);
         }
     }
 
     @Override
     public void remove(K key) {
+
 
     }
 
