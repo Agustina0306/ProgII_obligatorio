@@ -1,9 +1,25 @@
 package LinkedList;
 
 public class MyLinkedListIml<T> implements MyList<T> {
+
+    private Node<T> firstNode;
+
+    public MyLinkedListIml() {
+        this.firstNode = null;
+    }
+
     @Override
     public void add(T value) {
-
+        Node<T> newNode = new Node<>(value);
+        if (this.firstNode == null){
+            this.firstNode = newNode;
+        } else {
+            Node<T> tempNode = firstNode;
+            while (tempNode.getNext() != null){
+                tempNode = tempNode.getNext();
+            }
+            tempNode.setNext(newNode);
+        }
     }
 
     @Override
