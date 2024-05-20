@@ -25,13 +25,13 @@ public class MyLinkedListIml<T> implements MyList<T> {
     }
 
     @Override
-    public T getPosition (int position) {
+    public T getPosition (int position) throws DatoInvalido{
         T valueToReturn = null;
         int tempPosition = 0;
         Node<T> tempNode = this.firstNode;
 
         if (position < 0){
-            return null;
+            throw new DatoInvalido();
         }
 
         while (tempNode != null && tempPosition != position){
@@ -57,11 +57,9 @@ public class MyLinkedListIml<T> implements MyList<T> {
     }
 
     @Override
-    public void remove(T value) {
+    public void remove(T value) throws DatoInvalido {
         if (value == null){
-            //throw new DatoInvalido();
-            System.out.println("Lo pongo para no olvidarnos");
-            return;
+            throw new DatoInvalido();
         }
 
         if (this.firstNode == null || !this.contains(value)){

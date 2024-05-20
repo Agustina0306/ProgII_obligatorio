@@ -3,11 +3,11 @@ package LinkedList;
 public interface MyList <T>{
     void add(T value);
 
-    T getPosition(int position); //throws DatoInvalido;
+    T getPosition(int position) throws DatoInvalido;
 
     boolean contains(T value);
 
-    void remove(T value);
+    void remove(T value) throws DatoInvalido;
 
     int size();
 
