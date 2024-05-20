@@ -3,7 +3,7 @@ package LinkedList;
 public interface MyList <T>{
     void add(T value);
 
-    T getPosition(int position);
+    T getPosition(int position); //throws DatoInvalido;
 
     boolean contains(T value);
 
