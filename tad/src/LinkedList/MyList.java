@@ -3,7 +3,7 @@ package LinkedList;
 public interface MyList <T>{
     void add(T value);
 
-    T get(int position);
+    T getPosition(int position);
 
     boolean contains(T value);
 
@@ -11,5 +11,5 @@ public interface MyList <T>{
 
     int size();
 
-    T get(T value);
+    T getValue(T value);
 }

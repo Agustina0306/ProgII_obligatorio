@@ -25,7 +25,10 @@ public class MyLinkedListIml<T> implements MyList<T> {
     }
 
     @Override
-    public T get(int position) {
+    public T getPosition (int position) {
+        T valueToReturn = null;
+        int tempPosition = 0;
+        Node<T> tempNode = this.firstNode;
         return null;
     }
 
@@ -45,7 +48,7 @@ public class MyLinkedListIml<T> implements MyList<T> {
     }
 
     @Override
-    public T get(T value) {
+    public T getValue (T value) {
         return null;
     }
 }
