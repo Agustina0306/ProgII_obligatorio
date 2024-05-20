@@ -57,15 +57,13 @@ public class MyLinkedListIml<T> implements MyList<T> {
     }
 
     @Override
-    public void remove(T value) throws DatoInvalido {
+    public void remove(T value) throws DatoInvalido, EntidadNoExiste {
         if (value == null){
             throw new DatoInvalido();
         }
 
         if (this.firstNode == null || !this.contains(value)){
-            // throw new EntidadNoExiste();
-            System.out.println("Lo pongo para no olvidarnos");
-            return;
+            throw new EntidadNoExiste();
         }
 
         if (this.firstNode.getValue().equals(value)){
@@ -94,8 +92,19 @@ public class MyLinkedListIml<T> implements MyList<T> {
     }
 
     @Override
-    public T getValue (T value) {
-
+    public T getValue (T value) throws DatoInvalido{
+        Node<T> tempNode = this.firstNode;
+        if (value == null){
+            throw new DatoInvalido();
+        }
+        if (this.contains(value)){
+            while (tempNode != null) {
+                if (tempNode.getValue().equals(value)) {
+                    return tempNode.getValue();
+                }
+                tempNode = tempNode.getNext();
+            }
+        }
         return null;
     }
 }

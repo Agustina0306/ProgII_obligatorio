@@ -7,9 +7,9 @@ public interface MyList <T>{
 
     boolean contains(T value);
 
-    void remove(T value) throws DatoInvalido;
+    void remove(T value) throws DatoInvalido, EntidadNoExiste;
 
     int size();
 
-    T getValue(T value);
+    T getValue(T value) throws DatoInvalido;
 }
