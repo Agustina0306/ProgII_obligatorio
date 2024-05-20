@@ -1,3 +1,5 @@
+package LinkedList;
+
 public interface MyList <T>{
     void add(T value);
 
