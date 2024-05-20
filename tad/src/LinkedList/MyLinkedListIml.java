@@ -38,7 +38,7 @@ public class MyLinkedListIml<T> implements MyList<T> {
             tempNode = tempNode.getNext();
             tempPosition ++;
         }
-        if (tempPosition == position){
+        if (tempPosition == position && tempNode != null){
             valueToReturn = tempNode.getValue();
         }
         return valueToReturn;
@@ -58,7 +58,32 @@ public class MyLinkedListIml<T> implements MyList<T> {
 
     @Override
     public void remove(T value) {
+        if (value == null){
+            //throw new DatoInvalido();
+            System.out.println("Lo pongo para no olvidarnos");
+            return;
+        }
 
+        if (this.firstNode == null || !this.contains(value)){
+            // throw new EntidadNoExiste();
+            System.out.println("Lo pongo para no olvidarnos");
+            return;
+        }
+
+        if (this.firstNode.getValue().equals(value)){
+            this.firstNode = this.firstNode.getNext();
+        } else {
+            Node<T> current = this.firstNode;
+            Node<T> previous = null;
+
+            while (current != null && !current.getValue().equals(value)){
+                previous = current;
+                current = current.getNext();
+            }
+            if (current != null && previous != null) {
+                previous.setNext(current.getNext());
+            }
+        }
     }
 
     @Override
