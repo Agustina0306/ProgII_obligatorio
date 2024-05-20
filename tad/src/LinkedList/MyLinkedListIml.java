@@ -29,7 +29,19 @@ public class MyLinkedListIml<T> implements MyList<T> {
         T valueToReturn = null;
         int tempPosition = 0;
         Node<T> tempNode = this.firstNode;
-        return null;
+
+        if (position < 0){
+            return null;
+        }
+
+        while (tempNode != null && tempPosition != position){
+            tempNode = tempNode.getNext();
+            tempPosition ++;
+        }
+        if (tempPosition == position){
+            valueToReturn = tempNode.getValue();
+        }
+        return valueToReturn;
     }
 
     @Override
