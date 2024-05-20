@@ -46,6 +46,13 @@ public class MyLinkedListIml<T> implements MyList<T> {
 
     @Override
     public boolean contains(T value) {
+        Node<T> tempNode = this.firstNode;
+        while (tempNode != null) {
+            if (tempNode.getValue().equals(value)) {
+                return true;
+            }
+            tempNode = tempNode.getNext();
+        }
         return false;
     }
 
