@@ -10,15 +10,17 @@ public class MyLinkedListIml<T> implements MyList<T> {
 
     @Override
     public void add(T value) {
-        Node<T> newNode = new Node<>(value);
-        if (this.firstNode == null){
-            this.firstNode = newNode;
-        } else {
-            Node<T> tempNode = firstNode;
-            while (tempNode.getNext() != null){
-                tempNode = tempNode.getNext();
+        if (value != null) {
+            Node<T> newNode = new Node<>(value);
+            if (this.firstNode == null) {
+                this.firstNode = newNode;
+            } else {
+                Node<T> tempNode = firstNode;
+                while (tempNode.getNext() != null) {
+                    tempNode = tempNode.getNext();
+                }
+                tempNode.setNext(newNode);
             }
-            tempNode.setNext(newNode);
         }
     }
 
