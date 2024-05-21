@@ -1,6 +1,6 @@
-package BinarySearchTree;
+package tad.BinarySearchTree;
 
-import LinkedList.MyList;
+import tad.LinkedList.MyList;
 
 public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree<K,T>{
     private TreeNode<K,T> root;

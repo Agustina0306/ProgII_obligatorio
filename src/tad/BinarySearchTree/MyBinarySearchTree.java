@@ -1,5 +1,5 @@
-package BinarySearchTree;
-import LinkedList.MyList;
+package tad.BinarySearchTree;
+import tad.LinkedList.MyList;
 
 public interface MyBinarySearchTree<K extends Comparable<K>, T>{
     void add(K key, T value);

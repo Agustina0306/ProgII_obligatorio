@@ -1,4 +1,4 @@
-package LinkedList;
+package tad.LinkedList;
 
 public interface MyList <T>{
     void add(T value);

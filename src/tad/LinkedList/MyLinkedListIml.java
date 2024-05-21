@@ -1,9 +1,9 @@
-package LinkedList;
+package tad.LinkedList;
 
-import Queue.EmptyQueueException;
-import Queue.MyQueue;
-import Stack.EmptyStackException;
-import Stack.MyStack;
+import tad.Queue.EmptyQueueException;
+import tad.Queue.MyQueue;
+import tad.Stack.EmptyStackException;
+import tad.Stack.MyStack;
 
 public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
 

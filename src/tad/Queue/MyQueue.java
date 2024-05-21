@@ -1,4 +1,4 @@
-package Queue;
+package tad.Queue;
 
 public interface MyQueue<T>{
     void enqueue(T value);

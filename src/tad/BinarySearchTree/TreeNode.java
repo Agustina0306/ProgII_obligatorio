@@ -1,4 +1,4 @@
-package BinarySearchTree;
+package tad.BinarySearchTree;
 
 public class TreeNode <K extends Comparable<K>, T> {
 
