@@ -30,19 +30,19 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
     }
 
     @Override
-    public T getPosition (int position) throws DatoInvalido{
+    public T getPosition (int position) /*throws DatoInvalido*/{
         T valueToReturn = null;
         int tempPosition = 0;
         Node<T> tempNode = this.firstNode;
 
-        if (position < 0 || position >= this.size()){
-            throw new DatoInvalido();
-        }
+//        if (position < 0 || position >= this.size()){
+//            throw new DatoInvalido();
+//        }
         while (tempNode != null && tempPosition != position){
             tempNode = tempNode.getNext();
             tempPosition ++;
         }
-        if (tempPosition == position && tempNode != null){
+        if (tempPosition == position){
             valueToReturn = tempNode.getValue();
         }
         return valueToReturn;
@@ -61,13 +61,13 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
     }
 
     @Override
-    public void remove(T value) throws DatoInvalido, EntidadNoExiste {
-        if (value == null){
-            throw new DatoInvalido();
-        }
-        if (this.firstNode == null || !this.contains(value)){
-            throw new EntidadNoExiste();
-        }
+    public void remove(T value) /*throws DatoInvalido, EntidadNoExiste*/ {
+//        if (value == null){
+//            throw new DatoInvalido();
+//        }
+//        if (this.firstNode == null || !this.contains(value)){
+//            throw new EntidadNoExiste();
+//        }
         if (this.firstNode.getValue().equals(value)){
             this.firstNode = this.firstNode.getNext();
         }
@@ -79,7 +79,7 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
             previous = current;
             current = current.getNext();
         }
-        if (current != null && previous != null) {
+        if (current != null) {
             previous.setNext(current.getNext());
             if (current == this.lastNode){
                 this.lastNode = previous;
@@ -95,6 +95,14 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
             tempNode = tempNode.getNext();
         }
         return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        if (this.firstNode == null && this.lastNode == null){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -158,7 +166,7 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
                 this.firstNode = newNode;
                 this.lastNode = newNode;
             } else {
-                newNode.setNext(firstNode);
+                newNode.setNext(this.firstNode);
                 this.firstNode = newNode;
             }
         }
@@ -180,4 +188,5 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
         this.lastNode = current;
         return deqNode.getValue();
     }
+
 }

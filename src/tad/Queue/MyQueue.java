@@ -8,4 +8,8 @@ public interface MyQueue<T>{
     boolean contains(T value);
 
     int size();
+
+    T getPosition (int i);
+
+    boolean isEmpty();
 }

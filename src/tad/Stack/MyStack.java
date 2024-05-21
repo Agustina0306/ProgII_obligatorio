@@ -8,4 +8,6 @@ public interface MyStack <T> {
     T peek();
 
     int size();
+
+    boolean isEmpty();
 }
