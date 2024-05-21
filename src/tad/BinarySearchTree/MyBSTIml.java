@@ -1,5 +1,6 @@
 package tad.BinarySearchTree;
 
+import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
 
 public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree<K,T>{
@@ -18,11 +19,29 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
 
     @Override
     public void remove(K key) {
+        if (root != null){
+            root = root.remove(key);
+        }
     }
 
     @Override
     public boolean contains(K key) {
-        return false;
+        return containsRecursive (key, root);
+    }
+
+    private boolean containsRecursive(K keyToSearch, TreeNode<K,T> root){
+        boolean contains = false;
+        if (root != null){
+            int tempValue = keyToSearch.compareTo(root.getKey());
+            if (tempValue == 0){
+                contains = true;
+            } else if (tempValue > 0){
+                contains = containsRecursive(keyToSearch,root);
+            }else{
+                contains = containsRecursive(keyToSearch, root);
+            }
+        }
+        return contains;
     }
 
     @Override
@@ -32,7 +51,11 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
 
     @Override
     public MyList<K> inOrder() {
-        return null;
+        MyList<K> inOrderTraverse = new MyLinkedListIml<>();
+        if (root != null) {
+            root.inOrderTraverse(inOrderTraverse);
+        }
+        return inOrderTraverse;
     }
 
     @Override

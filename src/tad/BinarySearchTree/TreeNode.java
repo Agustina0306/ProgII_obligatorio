@@ -1,5 +1,7 @@
 package tad.BinarySearchTree;
 
+import tad.LinkedList.MyList;
+
 public class TreeNode <K extends Comparable<K>, T> {
 
     private K key;
@@ -28,6 +30,51 @@ public class TreeNode <K extends Comparable<K>, T> {
             } else {
                 leftChild.addInArbol(key, value);
             }
+        }
+    }
+
+    public TreeNode<K,T> remove (K key){
+        TreeNode<K,T> elementToReturn = this;
+        if (key.compareTo(this.key) > 0){
+            if (rightChild != null){
+                rightChild = rightChild.remove(key);
+            }
+        }else if (key.compareTo(this.key) < 0){
+            if (leftChild != null){
+                leftChild = leftChild.remove(key);
+            }
+        } else if (leftChild != null && rightChild != null){
+            TreeNode<K,T> min = rightChild.findMin();
+            this.key = min.getKey();
+            this.value = min.getValue();
+
+            rightChild = rightChild.remove((min.getKey()));
+        } else {
+            if (leftChild != null){
+                elementToReturn = leftChild;
+            } else {
+                elementToReturn = rightChild;
+            }
+        }
+        return elementToReturn;
+    }
+
+    public TreeNode<K,T> findMin(){
+        TreeNode<K,T> oReturn = this;
+        if (leftChild != null){
+            oReturn = leftChild.findMin();
+        }
+        return oReturn;
+    }
+
+    public void inOrderTraverse (MyList<K> list){
+        if (leftChild != null){
+            leftChild.inOrderTraverse(list);
+        }
+        list.add(this.getKey());
+
+        if(rightChild != null){
+            rightChild.inOrderTraverse(list);
         }
     }
 
