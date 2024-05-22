@@ -2,6 +2,8 @@ import org.junit.Test;
 import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 public class TestList {
 
@@ -15,8 +17,8 @@ public class TestList {
         lista.add(5);
 
         assertEquals(5, lista.size());
-        assertEquals(1, lista.getPosition(0));
-        assertEquals(4, lista.getPosition(3));
+        assertEquals(Integer.valueOf(1), lista.getPosition(0));
+        assertEquals(Integer.valueOf(4), lista.getPosition(3));
 
         assertFalse(lista.contains(6));
         assertTrue(lista.contains(3));
@@ -24,9 +26,9 @@ public class TestList {
         lista.remove(2);
 
         assertFalse(lista.contains(2));
-        assertEquals(3, lista.getPosition(1));
+        assertEquals(Integer.valueOf(3), lista.getPosition(1));
 
-        assertEquals(1, lista.getValue(1));
+        assertEquals(Integer.valueOf(1), lista.getValue(1));
 
     }
 }

@@ -42,7 +42,7 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
             tempNode = tempNode.getNext();
             tempPosition ++;
         }
-        if (tempPosition == position){
+        if (tempPosition == position ){
             valueToReturn = tempNode.getValue();
         }
         return valueToReturn;
@@ -106,11 +106,11 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
     }
 
     @Override
-    public T getValue (T value) throws DatoInvalido{
+    public T getValue (T value) /*throws DatoInvalido*/{
         Node<T> tempNode = this.firstNode;
-        if (value == null){
-            throw new DatoInvalido();
-        }
+//        if (value == null){
+//            throw new DatoInvalido();
+//        }
         if (this.contains(value)){
             while (tempNode != null) {
                 if (tempNode.getValue().equals(value)) {

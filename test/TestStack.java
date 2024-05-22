@@ -15,19 +15,19 @@ public class TestStack {
         Stack.push(3);
         Stack.push(4);
 
-        assertEquals(Integer.valueOf(3), Stack.peek());
+        assertEquals(Integer.valueOf(4), Stack.peek());
 
         try {
-            assertEquals(Integer.valueOf(3), Stack.pop());
+            assertEquals(Integer.valueOf(4), Stack.pop());
         } catch (EmptyStackException e) {
             throw new RuntimeException(e);
         }
 
 
-        assertEquals(Integer.valueOf(4), Stack.peek());
+        assertEquals(Integer.valueOf(3), Stack.peek());
 
         try {
-            assertEquals(Integer.valueOf(4), Stack.pop());
+            assertEquals(Integer.valueOf(3), Stack.pop());
         } catch (EmptyStackException e) {
             throw new RuntimeException(e);
         }

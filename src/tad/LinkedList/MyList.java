@@ -11,7 +11,7 @@ public interface MyList <T>{
 
     int size();
 
-    T getValue(T value) throws DatoInvalido;
+    T getValue(T value); //throws DatoInvalido;
 
     boolean isEmpty();
 }
