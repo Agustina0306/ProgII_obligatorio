@@ -24,6 +24,7 @@ public class TestHash {
         assertTrue(keys.contains("three"));
         assertFalse(keys.contains("two"));
 
+
         assertEquals(Integer.valueOf(1), hash.get("one"));
         assertEquals(Integer.valueOf(2), hash.get("two"));
         assertEquals(Integer.valueOf(3), hash.get("three"));
