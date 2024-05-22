@@ -1,6 +1,7 @@
 import org.junit.Test;
 import tad.BinarySearchTree.MyBSTIml;
 import tad.BinarySearchTree.MyBinarySearchTree;
+import tad.BinarySearchTree.TreeNode;
 import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
 
@@ -20,6 +21,10 @@ public class TestBinaryTree {
         Binarytree.remove(2);
 
         assertFalse(Binarytree.contains(2));
+
+        TreeNode<Integer,Integer> expectedRoot = new TreeNode<>(3,3);
+
+        assertEquals(expectedRoot.getKey(), Binarytree.getRoot().getKey());
 
         // Prueba de inOrder
         MyList<Integer> inOrderExpectedList = new MyLinkedListIml<>();

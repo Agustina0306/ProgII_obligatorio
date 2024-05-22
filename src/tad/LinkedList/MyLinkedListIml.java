@@ -196,8 +196,6 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
             throw new EmptyQueueException();
         }
         deqNode = this.lastNode.getValue();
-        System.out.println(deqNode);
-        System.out.println("PrimerNodo: " + this.firstNode.getValue());
         remove(deqNode);
 
         return deqNode;
