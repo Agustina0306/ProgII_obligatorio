@@ -46,7 +46,22 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
 
     @Override
     public T find(K key) {
-        return null;
+        return findRecursive(key, root);
+    }
+
+    private T findRecursive(K keyToSearch, TreeNode<K,T> root){
+        T valueToReturn = null;
+        if (root != null){
+            int tempValue = keyToSearch.compareTo(root.getKey());
+            if (tempValue == 0){
+                valueToReturn = root.getValue();
+            }else if (tempValue > 0){
+                valueToReturn = findRecursive(keyToSearch, root.getRightChild());
+            }else {
+                valueToReturn = findRecursive(keyToSearch, root.getLeftChild());
+            }
+        }
+        return valueToReturn;
     }
 
     @Override
@@ -60,16 +75,24 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
 
     @Override
     public MyList<K> postOrder() {
-        return null;
+        MyList<K> postOrderTraverse = new MyLinkedListIml<>();
+        if (root != null){
+            root.postOrderTraverse(postOrderTraverse);
+        }
+        return postOrderTraverse;
     }
 
     @Override
     public MyList<K> preOrder() {
-        return null;
+        MyList<K> preOrderTraverse = new MyLinkedListIml<>();
+        if (root != null){
+            root.preOrderTraverse(preOrderTraverse);
+        }
+        return preOrderTraverse;
     }
 
     @Override
     public TreeNode<K, T> getRoot() {
-        return null;
+        return this.root;
     }
 }

@@ -78,6 +78,26 @@ public class TreeNode <K extends Comparable<K>, T> {
         }
     }
 
+    public void postOrderTraverse(MyList<K> list){
+        if (leftChild != null){
+            leftChild.postOrderTraverse(list);
+        }
+        if (rightChild != null){
+            rightChild.postOrderTraverse(list);
+        }
+        list.add(this.getKey());
+    }
+
+    public void preOrderTraverse (MyList<K> list){
+        list.add(this.getKey());
+        if(leftChild != null){
+            leftChild.preOrderTraverse(list);
+        }
+        if (rightChild != null){
+            rightChild.preOrderTraverse(list);
+        }
+    }
+
     public K getKey() {
         return key;
     }
