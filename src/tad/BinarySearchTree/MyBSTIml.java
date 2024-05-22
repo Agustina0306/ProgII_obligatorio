@@ -36,9 +36,9 @@ public class MyBSTIml <K extends Comparable<K>, T> implements MyBinarySearchTree
             if (tempValue == 0){
                 contains = true;
             } else if (tempValue > 0){
-                contains = containsRecursive(keyToSearch,root);
+                contains = containsRecursive(keyToSearch,root.getRightChild());
             }else{
-                contains = containsRecursive(keyToSearch, root);
+                contains = containsRecursive(keyToSearch, root.getLeftChild());
             }
         }
         return contains;
