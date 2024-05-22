@@ -2,7 +2,6 @@ import org.junit.Test;
 import tad.Queue.MyQueue;
 import tad.Queue.EmptyQueueException;
 import tad.LinkedList.MyLinkedListIml;
-import tad.Stack.EmptyStackException;
 
 
 import static org.junit.Assert.*;
@@ -16,6 +15,7 @@ public class TestQueue {
         queue.enqueue(1);
         queue.enqueue(3);
 
+        assertEquals(3,queue.size());
 
         assertTrue(queue.contains(3));
 
@@ -31,7 +31,7 @@ public class TestQueue {
 
         assertEquals(2,queue.size());
 
-        assertEquals(Integer.valueOf(3), queue.getPosition(1));
+        assertEquals(Integer.valueOf(3), queue.getValueQueue(1));
 
         try {
             assertEquals(Integer.valueOf(1), queue.dequeue());
@@ -44,13 +44,11 @@ public class TestQueue {
             throw new RuntimeException(e);
         }
 
+        assertEquals(0,queue.size());
+
         assertTrue(queue.isEmpty());
 
-        try {
-            assertEquals(Integer.valueOf(3), queue.dequeue());
-        } catch (EmptyQueueException e) {
-            throw new RuntimeException(e);
-        }
+        assertThrows(EmptyQueueException.class, queue::dequeue);
 
     }
 

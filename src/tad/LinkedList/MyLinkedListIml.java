@@ -82,10 +82,22 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
             current = current.getNext();
         }
         if (current != null) {
-            previous.setNext(current.getNext());
-            if (current == this.lastNode){
+            if (current == this.firstNode && current != this.lastNode){
+                Node<T> temp = this.firstNode;
+                this.firstNode = this.firstNode.getNext();
+                temp.setNext(null);
+            } else if (current == this.lastNode && current != this.firstNode){
+                previous.setNext(null);
                 this.lastNode = previous;
+            } else if (current == this.lastNode && current == this.firstNode){
+                this.firstNode = null;
+                this.lastNode = null;
+            } else {
+                previous.setNext(current.getNext());
+                current.setNext(null);
             }
+        } else {
+
         }
 
     }
@@ -101,7 +113,7 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
 
     @Override
     public boolean isEmpty() {
-        if (this.firstNode == null && this.lastNode == null){
+        if (this.size() == 0){
             return true;
         }
         return false;
@@ -164,7 +176,7 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
     public void enqueue(T value) {
         if (value != null){
             Node<T> newNode = new Node<>(value);
-            if (this.firstNode == null){
+            if (this.isEmpty()){
                 this.firstNode = newNode;
                 this.lastNode = newNode;
             } else {
@@ -179,22 +191,21 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
 
     @Override
     public T dequeue() throws EmptyQueueException {
-        //Node<T> current = firstNode;
-        T deqNode = null;
-        if (this.lastNode == null){
+        T deqNode = this.lastNode.getValue();
+        if (this.isEmpty()){
             throw new EmptyQueueException();
         }
-        if (this.lastNode != null){
-            deqNode = this.lastNode.getValue();
-            remove(deqNode);
-        }
-//        while(current.getNext() != this.lastNode){
-//            current = current.getNext();
-//        }
-//        deqNode = current.getNext();
-//        current.setNext(null);
-//        this.lastNode = current;
+        deqNode = this.lastNode.getValue();
+        System.out.println(deqNode);
+        System.out.println("PrimerNodo: " + this.firstNode.getValue());
+        remove(deqNode);
+
         return deqNode;
     }
 
+    @Override
+    public T getValueQueue(int position) {
+        int lookInPosition = (this.size() - 1 - position);
+        return this.getPosition(lookInPosition);
+    }
 }
