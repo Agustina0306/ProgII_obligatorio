@@ -1,10 +1,6 @@
 import org.junit.Test;
 import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
-import tad.LinkedList.*;
-
-
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 public class TestList {
@@ -12,6 +8,7 @@ public class TestList {
     @Test
     public void Test_metodos_lista(){
         MyList<Integer> lista = new MyLinkedListIml<>();
+        MyList<Integer> listaVacia = new MyLinkedListIml<>();
         lista.add(1);
         lista.add(2);
         lista.add(3);
@@ -32,6 +29,11 @@ public class TestList {
         assertEquals(Integer.valueOf(3), lista.getPosition(1));
 
         assertEquals(Integer.valueOf(1), lista.getValue(1));
+
+        assertFalse(lista.isEmpty());
+        assertTrue(listaVacia.isEmpty());
+
+
 
     }
 }
