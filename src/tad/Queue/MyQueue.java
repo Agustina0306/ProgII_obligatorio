@@ -9,7 +9,7 @@ public interface MyQueue<T>{
 
     int size();
 
-    T getPosition (int i);
+    T getPosition (int position);
 
     boolean isEmpty();
 }

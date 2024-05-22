@@ -18,7 +18,7 @@ public class TestList {
 
         assertEquals(5, lista.size());
         assertEquals(Integer.valueOf(1), lista.getPosition(0));
-        assertEquals(Integer.valueOf(4), lista.getPosition(3));
+        assertEquals(Integer.valueOf(2), lista.getPosition(1));
 
         assertFalse(lista.contains(6));
         assertTrue(lista.contains(3));

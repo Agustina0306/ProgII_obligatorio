@@ -38,12 +38,14 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
 //        if (position < 0 || position >= this.size()){
 //            throw new DatoInvalido();
 //        }
-        while (tempNode != null && tempPosition != position){
-            tempNode = tempNode.getNext();
-            tempPosition ++;
-        }
-        if (tempPosition == position ){
-            valueToReturn = tempNode.getValue();
+        if (position >= 0) {
+            while (tempNode != null && tempPosition != position) {
+                tempNode = tempNode.getNext();
+                tempPosition++;
+            }
+            if (tempPosition == position) {
+                valueToReturn = tempNode.getValue();
+            }
         }
         return valueToReturn;
     }
@@ -169,24 +171,30 @@ public class MyLinkedListIml<T> implements MyList<T> , MyStack<T>, MyQueue<T> {
                 newNode.setNext(this.firstNode);
                 this.firstNode = newNode;
             }
+        } else {
+
         }
 
     }
 
     @Override
     public T dequeue() throws EmptyQueueException {
-        Node<T> current = firstNode;
-        Node<T> deqNode = null;
+        //Node<T> current = firstNode;
+        T deqNode = null;
         if (this.lastNode == null){
             throw new EmptyQueueException();
         }
-        while(current.getNext() != this.lastNode){
-            current = current.getNext();
+        if (this.lastNode != null){
+            deqNode = this.lastNode.getValue();
+            remove(deqNode);
         }
-        deqNode = current.getNext();
-        current.setNext(null);
-        this.lastNode = current;
-        return deqNode.getValue();
+//        while(current.getNext() != this.lastNode){
+//            current = current.getNext();
+//        }
+//        deqNode = current.getNext();
+//        current.setNext(null);
+//        this.lastNode = current;
+        return deqNode;
     }
 
 }
