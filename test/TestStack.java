@@ -1,8 +1,10 @@
 import org.junit.Test;
 import tad.LinkedList.MyLinkedListIml;
+import tad.Queue.EmptyQueueException;
 import tad.Stack.EmptyStackException;
 import tad.Stack.MyStack;
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.Assert.*;
 
 
 public class TestStack {
@@ -23,6 +25,7 @@ public class TestStack {
             throw new RuntimeException(e);
         }
 
+        assertEquals(2, Stack.size());
 
         assertEquals(Integer.valueOf(3), Stack.peek());
 
@@ -32,7 +35,7 @@ public class TestStack {
             throw new RuntimeException(e);
         }
 
-
+        assertFalse(Stack.isEmpty());
 
         assertEquals(Integer.valueOf(1), Stack.peek());
 
@@ -43,6 +46,11 @@ public class TestStack {
         }
 
         assertEquals(0, Stack.size());
+        assertTrue(Stack.isEmpty());
+
+        assertEquals(null, Stack.peek());
+
+        assertThrows(EmptyStackException.class, Stack::pop);
 
     }
 }

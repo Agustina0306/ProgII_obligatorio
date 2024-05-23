@@ -11,6 +11,5 @@ public interface MyQueue<T>{
 
     T getValueQueue (int position);
 
-//    T getPosition (int position);
     boolean isEmpty();
 }

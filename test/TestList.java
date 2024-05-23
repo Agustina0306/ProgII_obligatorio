@@ -33,7 +33,5 @@ public class TestList {
         assertFalse(lista.isEmpty());
         assertTrue(listaVacia.isEmpty());
 
-
-
     }
 }
