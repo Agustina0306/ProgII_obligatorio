@@ -10,7 +10,11 @@ public class Top50 {
 
     private Cancion cancion;
 
-
+    public Top50(String pais, LocalDate fecha, Cancion cancion) {
+        this.pais = pais;
+        this.fecha = fecha;
+        this.cancion = cancion;
+    }
 
     public String getPais() {
         return pais;
@@ -22,5 +26,17 @@ public class Top50 {
 
     public Cancion getCancion() {
         return cancion;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setCancion(Cancion cancion) {
+        this.cancion = cancion;
     }
 }

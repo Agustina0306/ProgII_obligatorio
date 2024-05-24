@@ -12,6 +12,14 @@ public class Cancion {
 
     private Artista artista;
 
+    public Cancion(String titulo, String idSong, double tempo, int posicion, Artista artista) {
+        this.titulo = titulo;
+        this.idSong = idSong;
+        this.tempo = tempo;
+        this.posicion = posicion;
+        this.artista = artista;
+    }
+
     public String getTitulo() {
         return titulo;
     }
