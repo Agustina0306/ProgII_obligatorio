@@ -39,4 +39,8 @@ public class Cancion {
     public Artista getArtista() {
         return artista;
     }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
 }
