@@ -30,6 +30,8 @@ public class SpotifyMenu {
                     System.out.println("Ingrese el país:");
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                    String fecha = scanner.nextLine();
+                    //Spotify.top10DiaPais(pais, fecha, DataLoader data);
                     break;
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
