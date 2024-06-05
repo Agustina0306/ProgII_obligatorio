@@ -1,11 +1,16 @@
 
 import java.util.Scanner;
+import entities.DataLoader;
 
 public class Spotify {
 
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+        System.out.println("Cargando datos, por favor espere...");
+        DataLoader data = new DataLoader();
+        data.loadData("https://cursos.um.edu.uy/mod/url/view.php?id=259201");
 
         int option;
         do {
