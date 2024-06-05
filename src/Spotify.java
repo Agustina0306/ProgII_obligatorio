@@ -8,9 +8,10 @@ public class Spotify {
 
     public static void main(String[] args) {
 
-        System.out.println("Cargando datos, por favor espere...");
+        System.out.println("Ingrese el filePath del dataSet: ");
+        String path = scanner.nextLine();
         DataLoader data = new DataLoader();
-        data.loadData("https://cursos.um.edu.uy/mod/url/view.php?id=259201");
+        data.loadData(path);
 
         int option;
         do {

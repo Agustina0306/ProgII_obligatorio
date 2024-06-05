@@ -15,6 +15,8 @@ public class DataLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int datosNumero = 0;
 
+            System.out.println("Cargando datos, por favor espere...");
+
             br.readLine(); // descarto la primera linea
 
             String line;
