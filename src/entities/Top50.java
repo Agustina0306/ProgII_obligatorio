@@ -6,13 +6,13 @@ public class Top50 {
 
     private String pais;
 
-    private String fecha;
+    private LocalDate fecha;
 
     private int posicion;
 
     private Cancion cancion;
 
-    public Top50(String pais, String fecha, Cancion cancion, int posicion) {
+    public Top50(String pais, LocalDate fecha, Cancion cancion, int posicion) {
         this.pais = pais;
         this.fecha = fecha;
         this.cancion = cancion;
@@ -23,7 +23,7 @@ public class Top50 {
         return pais;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
@@ -39,7 +39,7 @@ public class Top50 {
         this.pais = pais;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

@@ -3,10 +3,15 @@ package entities;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+
 import tad.Hash2.MyClosedHash;
 import tad.Hash2.MyHash;
+import java.time.format.DateTimeFormatter;
 
 public class DataLoader {
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private MyHash<String, Top50> topEntriesHash = new MyClosedHash<>();
     private MyHash<String, Cancion> songHash = new MyClosedHash<>();
     private MyHash<String, Artista> artistHash = new MyClosedHash<>();
@@ -33,7 +38,7 @@ public class DataLoader {
                 String[] artistNames;
                 int position;
                 String country;
-                String date;
+                LocalDate date;
                 double tempo;
 
                 // TENGO QUE HACERLO ASI PORQUE TENGO ALGUNAS CANCIONES COMO DEAR MY FRIEND, QUE AFECTA LA COMA DEL NOMBRE
@@ -41,13 +46,13 @@ public class DataLoader {
                     artistNames = values[3].split(", ");
                     position = Integer.parseInt(values[4]);
                     country = values[7];
-                    date = values[8];
+                    date = LocalDate.parse(values[8], formatter);
                     tempo = Double.parseDouble(values[values.length - 2]);
                 } else {
                     artistNames = values[2].split(", ");
                     position = Integer.parseInt(values[3]);
                     country = values[6];
-                    date = values[7];
+                    date = LocalDate.parse(values[7], formatter);
                     tempo = Double.parseDouble(values[values.length - 2]);
                 }
 
@@ -65,7 +70,6 @@ public class DataLoader {
                 String topEntryKey = country + date;
                 Top50 topEntry = new Top50(country,date,song,position);
                 topEntriesHash.insert(topEntryKey,topEntry);
-                //Top50 topEntry = topEntriesHash.insertIfAbsent(topEntryKey, () -> new Top50(country, date, song));
             }
             System.out.println("Datos cargados exitosamente.");
         } catch (IOException e) {  // Excepcion de java que salta cuando no se puede leer correctamente el archivo
