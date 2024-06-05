@@ -42,7 +42,7 @@ public class DataLoader {
                 double tempo;
 
                 // TENGO QUE HACERLO ASI PORQUE TENGO ALGUNAS CANCIONES COMO DEAR MY FRIEND, QUE AFECTA LA COMA DEL NOMBRE
-                if (values[2] == "") {
+                if (values[2] == "" && values[1] != "") {
                     artistNames = values[3].split(", ");
                     position = Integer.parseInt(values[4]);
                     country = values[7];
