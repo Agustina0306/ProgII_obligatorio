@@ -1,5 +1,8 @@
 package entities;
 
+import tad.LinkedList.MyLinkedListIml;
+import tad.LinkedList.MyList;
+
 public class Cancion {
 
     private String titulo;
@@ -8,16 +11,13 @@ public class Cancion {
 
     private double tempo;
 
-    private int posicion;
+    private MyList<Artista> artista;
 
-    private Artista artista;
-
-    public Cancion(String titulo, String idSong, double tempo, int posicion, Artista artista) {
+    public Cancion(String titulo, String idSong, double tempo) {
         this.titulo = titulo;
         this.idSong = idSong;
         this.tempo = tempo;
-        this.posicion = posicion;
-        this.artista = artista;
+        this.artista = new MyLinkedListIml<>();
     }
 
     public String getTitulo() {
@@ -32,15 +32,7 @@ public class Cancion {
         return tempo;
     }
 
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public Artista getArtista() {
+    public MyList<Artista> getArtista() {
         return artista;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
     }
 }

@@ -3,8 +3,10 @@ package tad.Hash2;
 import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
 
+import java.util.function.Supplier;
+
 public class MyClosedHash <K,V> implements MyHash<K,V> {
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10000;
     private static final float LOAD_FACTOR = 0.7f;
     private int size;
     private int capacity;
@@ -119,18 +121,40 @@ public class MyClosedHash <K,V> implements MyHash<K,V> {
         return valueToReturn;
     }
 
-
-    private static class Entry<K, V> {
-        K key;
-        V value;
-        boolean isDeleted;
-
-        Entry(K key, V value) {
-            this.key = key;
-            this.value = value;
-            this.isDeleted = true; // comienzo como que todos los valores estan eliminados, al agregarlo
+    @Override
+    public V insertIfAbsent(K key, Supplier<V> supplier) {
+        float hashLoadFactor = (float) size/capacity;
+        if (hashLoadFactor > LOAD_FACTOR){
+            this.resize();
         }
+        int hashPosition = this.hash(key);
+        for (int i = 0; i < capacity; i++) {
+            if (hashPosition >= capacity) {
+                hashPosition = 0;
+            }
+            if (table[hashPosition] == null) {
+                V value = supplier.get();
+                table[hashPosition] = new Entry<>(key, value);
+                table[hashPosition].isDeleted = false;
+                size++;
+                return value;
+            } else if (table[hashPosition].key.equals(key) && !table[hashPosition].isDeleted) {
+                return table[hashPosition].value;
+            }
+            hashPosition = (hashPosition + 1) % capacity;
+        }
+        return null;
+    }
 
+    @Override
+    public MyList<Entry<K, V>> getTable() {
+        MyList<Entry<K, V>> entries = new MyLinkedListIml<>();
+        for (int i = 0; i < capacity; i++) {
+            if (table[i] != null && !table[i].isDeleted) {
+                entries.add(table[i]);
+            }
+        }
+        return entries;
     }
 
     private void resize () {
