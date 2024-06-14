@@ -36,6 +36,7 @@ public class DataLoader {
                 String spotifyId = values[0];
                 String songTitle = values[1];
                 String[] artistNames;
+                String positionStr;
                 int position;
                 String country;
                 LocalDate date;
@@ -44,12 +45,14 @@ public class DataLoader {
                 // TENGO QUE HACERLO ASI PORQUE TENGO ALGUNAS CANCIONES COMO DEAR MY FRIEND, QUE AFECTA LA COMA DEL NOMBRE
                 if (values[2] == "" && values[1] != "") {
                     artistNames = values[3].split(", ");
+                    positionStr = values[4];
                     position = Integer.parseInt(values[4]);
                     country = values[7];
                     date = LocalDate.parse(values[8], formatter);
                     tempo = Double.parseDouble(values[values.length - 2]);
                 } else {
                     artistNames = values[2].split(", ");
+                    positionStr = values[3];
                     position = Integer.parseInt(values[3]);
                     country = values[6];
                     date = LocalDate.parse(values[7], formatter);
@@ -67,7 +70,7 @@ public class DataLoader {
                 }
 
                 // Crear y agregar la entrada Top50
-                String topEntryKey = country + date;
+                String topEntryKey = country + date + positionStr;
                 Top50 topEntry = new Top50(country,date,song,position);
                 topEntriesHash.insert(topEntryKey,topEntry);
             }
