@@ -7,6 +7,11 @@ import java.time.LocalDate;
 
 import tad.Hash2.MyClosedHash;
 import tad.Hash2.MyHash;
+import tad.LinkedList.MyLinkedListIml;
+import tad.LinkedList.MyList;
+import tad.heap.MyHeap;
+import tad.heap.MyHeapImpl;
+
 import java.time.format.DateTimeFormatter;
 
 public class DataLoader {
@@ -16,6 +21,7 @@ public class DataLoader {
     private MyHash<String, Cancion> songHash = new MyClosedHash<>();
     private MyHash<String, Artista> artistHash = new MyClosedHash<>();
 
+    private MyHash <LocalDate, MyHeap<Top50>> top50Fecha = new MyClosedHash<>();
     public void loadData(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int datosNumero = 0;
@@ -73,6 +79,19 @@ public class DataLoader {
                 String topEntryKey = country + "|" + date + "|" + positionStr;
                 Top50 topEntry = new Top50(country,date,song,position);
                 topEntriesHash.insert(topEntryKey,topEntry);
+
+                if ( !top50Fecha.contains(date)) {
+                    MyHeap<Top50> newHeap = new MyHeapImpl<>(false);
+                    newHeap.insert(topEntry);
+                    top50Fecha.insert(date, newHeap);
+                } else {
+                    MyHeap<Top50> heap = top50Fecha.getValue(date);
+                    if (heap.search(topEntry).getCancion().equals(song)){
+                        topEntry.setCounter();
+                    } else{
+                        heap.insert(topEntry);
+                    }
+                }
             }
             System.out.println("Datos cargados exitosamente.");
         } catch (IOException e) {  // Excepcion de java que salta cuando no se puede leer correctamente el archivo
@@ -90,5 +109,9 @@ public class DataLoader {
 
     public MyHash<String, Artista> getArtistHash() {
         return artistHash;
+    }
+
+    public MyHash<LocalDate, MyHeap<Top50>> getTop50Fecha() {
+        return top50Fecha;
     }
 }

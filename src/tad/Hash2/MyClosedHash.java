@@ -130,8 +130,9 @@ public class MyClosedHash <K,V> implements MyHash<K,V> {
             }
             if (table[hashPosition] == null){
                 hashPosition = (hashPosition + 1) % capacity;
-            } else if (table[hashPosition].key.equals(key) && table[hashPosition].isDeleted != true){
+            } else if (table[hashPosition].key.equals(key) && !table[hashPosition].isDeleted){
                 valueToReturn = true;
+                return valueToReturn;
             } else {
                 hashPosition = (hashPosition + 1) % capacity;
             }

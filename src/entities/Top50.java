@@ -2,7 +2,7 @@ package entities;
 
 import java.time.LocalDate;
 
-public class Top50 {
+public class Top50 implements Comparable<Top50>{
 
     private String pais;
 
@@ -12,11 +12,14 @@ public class Top50 {
 
     private Cancion cancion;
 
+    private int counter;
+
     public Top50(String pais, LocalDate fecha, Cancion cancion, int posicion) {
         this.pais = pais;
         this.fecha = fecha;
         this.cancion = cancion;
         this.posicion = posicion;
+        this.counter = 0;
     }
 
     public String getPais() {
@@ -49,5 +52,20 @@ public class Top50 {
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+
+    public void setCounter() {
+        this.counter++;
+    }
+
+    @Override
+    public int compareTo(Top50 o) {
+        if (this.counter > o.counter){
+            return 1;
+        } else if (this.counter < o.counter) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
