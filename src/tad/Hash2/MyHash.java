@@ -20,4 +20,6 @@ public interface MyHash<K,V> {
 
     MyList<Entry<K, V>> getTable();
 
+    V getValue (K key);
+
 }

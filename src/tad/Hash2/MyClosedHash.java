@@ -103,6 +103,24 @@ public class MyClosedHash <K,V> implements MyHash<K,V> {
     }
 
     @Override
+    public V getValue(K key) {
+        int hashPosition = this.hash(key);
+        for (int i = 0; i < capacity; i++) {
+            if (hashPosition >= capacity) {
+                hashPosition = 0;
+            }
+            if (table[hashPosition] == null) {
+                hashPosition = (hashPosition + 1) % capacity;
+            } else if (table[hashPosition].key.equals(key) && !table[hashPosition].isDeleted) {
+                return table[hashPosition].value;
+            } else {
+                hashPosition = (hashPosition + 1) % capacity;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean contains(K key) {
         int hashPosition = this.hash(key);
         boolean valueToReturn = false;
