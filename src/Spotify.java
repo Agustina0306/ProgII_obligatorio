@@ -6,6 +6,10 @@ import exceptions.DatoNoEXiste;
 import tad.LinkedList.DatoInvalido;
 import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
+import tad.heap.MyHeap;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Spotify<T>  {
 
@@ -18,18 +22,35 @@ public class Spotify<T>  {
         }
         int i=10;
         while(i>0){
-            i--;
+
             String j= String.valueOf(i);
-            String key = pais + "|"+ fecha + "|" + j;
+            String key = pais + "|" + fecha + "|" + j;
             MyList<Artista> artistas = data.getTopEntries().getValue(key).getCancion().getArtista();
             String titulo= data.getTopEntries().getValue(key).getCancion().getTitulo();
-            String nombresArtistas= null;
+            StringBuilder nombresArtistas = new StringBuilder();
+
             for (int k = 0; k < artistas.size(); k++) {
-                nombresArtistas +=artistas.getPosition(k);
-                nombresArtistas+= " | ";
+                if (k > 0) {
+                    nombresArtistas.append(" | ");
+                }
+                nombresArtistas.append(artistas.getPosition(k).getNombre());
             }
 
-            System.out.println("Nombre Cancion: "+ titulo + "Artista: "+ nombresArtistas + "Posicion: "+ j );
+            System.out.println("Nombre Cancion: " + titulo + "Artista: "+ nombresArtistas + "Posicion: "+ j );
+            i--;
+        }
+
+    }
+
+    public static void Top5canciones (String fecha, DataLoader data) throws DatoInvalido {
+        if (fecha == null){
+            throw new DatoInvalido();
+        }
+
+        LocalDate date = LocalDate.parse(fecha);
+        MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(date);
+        for (int i = 0; i < 5 ; i++) {
+            System.out.println(cancionesFecha.delete().getCancion().getTitulo());
         }
 
     }
