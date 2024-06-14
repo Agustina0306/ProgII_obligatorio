@@ -70,7 +70,7 @@ public class DataLoader {
                 }
 
                 // Crear y agregar la entrada Top50
-                String topEntryKey = country + date + positionStr;
+                String topEntryKey = country + "|" + date + "|" + positionStr;
                 Top50 topEntry = new Top50(country,date,song,position);
                 topEntriesHash.insert(topEntryKey,topEntry);
             }
