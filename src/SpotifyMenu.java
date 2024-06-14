@@ -1,12 +1,14 @@
 
 import java.util.Scanner;
 import entities.DataLoader;
+import exceptions.DatoNoEXiste;
+import tad.LinkedList.DatoInvalido;
 
 public class SpotifyMenu {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DatoInvalido, DatoNoEXiste {
 
         System.out.println("Ingrese el filePath del dataSet: ");
         String path = scanner.nextLine();
@@ -31,7 +33,7 @@ public class SpotifyMenu {
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String fecha = scanner.nextLine();
-                    //Spotify.top10DiaPais(pais, fecha, DataLoader data);
+                    Spotify.top10DiaPais(pais, fecha, data);
                     break;
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
