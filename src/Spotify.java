@@ -11,7 +11,7 @@ import tad.heap.MyHeap;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Spotify<T>  {
+public class Spotify{
 
     public static void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste {
         if (pais==null | fecha==null | data==null){
