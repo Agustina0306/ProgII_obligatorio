@@ -55,7 +55,12 @@ public class Spotify{
 
     }
 
-    public static void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data){
+    public static void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data) throws DatoInvalido {
+
+        if (fechaInicio == null || fechaFin == null || data == null){
+            throw new DatoInvalido();
+        }
+
         LocalDate inicio = LocalDate.parse(fechaInicio);
         LocalDate fin = LocalDate.parse(fechaFin);
         MyList<LocalDate> rangeDate = new MyLinkedListIml<>();
