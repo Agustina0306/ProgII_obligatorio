@@ -72,5 +72,6 @@ public class SpotifyMenu {
         } while (option != 0);
 
         scanner.close();
+
     }
 }
