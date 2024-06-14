@@ -10,6 +10,8 @@ public class SpotifyMenu {
 
     public static void main(String[] args) throws DatoInvalido, DatoNoEXiste {
 
+        //Spotify spotify = new Spotify();
+
         System.out.println("Ingrese el filePath del dataSet: ");
         String path = scanner.nextLine();
         DataLoader data = new DataLoader();
@@ -38,6 +40,7 @@ public class SpotifyMenu {
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String date = scanner.nextLine();
+                    Spotify.Top5canciones(date, data);
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
