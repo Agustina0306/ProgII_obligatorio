@@ -10,7 +10,7 @@ public class SpotifyMenu {
 
     public static void main(String[] args) throws DatoInvalido, DatoNoEXiste {
 
-        //Spotify spotify = new Spotify();
+        Spotify spotify = new Spotify();
 
         System.out.println("Ingrese el filePath del dataSet: ");
         String path = scanner.nextLine();
@@ -35,24 +35,28 @@ public class SpotifyMenu {
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String fecha = scanner.nextLine();
-                    Spotify.top10DiaPais(pais, fecha, data);
+                    spotify.top10DiaPais(pais, fecha, data);
                     break;
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String date = scanner.nextLine();
-                    Spotify.Top5canciones(date, data);
+                    spotify.Top5canciones(date, data);
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
                     String startDate = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                     String endDate = scanner.nextLine();
+                    spotify.Top7ArtistasEnRango(startDate, endDate, data);
                     break;
                 case 4:
                     System.out.println("Ingrese el artista:");
                     String artist = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
-                    date = scanner.nextLine();
+                    String date4 = scanner.nextLine();
+                    System.out.println("Ingrese un pais: ");
+                    String pais4 = scanner.nextLine();
+                    spotify.cantArtistaTop50(date4,  pais4, artist, data);
                     break;
                 case 5:
                     System.out.println("Ingrese el tempo mínimo:");

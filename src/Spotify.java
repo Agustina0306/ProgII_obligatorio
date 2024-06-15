@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Spotify{
 
-    public static void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste {
+    public void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste {
         if (pais==null | fecha==null | data==null){
             throw new DatoInvalido();
         }
@@ -43,7 +43,7 @@ public class Spotify{
 
     }
 
-    public static void Top5canciones (String fecha, DataLoader data) throws DatoInvalido {
+    public void Top5canciones (String fecha, DataLoader data) throws DatoInvalido {
         if (fecha == null){
             throw new DatoInvalido();
         }
@@ -55,26 +55,21 @@ public class Spotify{
 
     }
 
-    public static void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data) throws DatoInvalido {
+    public void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data) throws DatoInvalido {
 
         if (fechaInicio == null || fechaFin == null || data == null){
             throw new DatoInvalido();
         }
+        // VERIFICAR FECHA INICIO > FECHA FIN
 
         LocalDate inicio = LocalDate.parse(fechaInicio);
         LocalDate fin = LocalDate.parse(fechaFin);
-        MyList<LocalDate> rangeDate = new MyLinkedListIml<>();
         LocalDate currentDate = inicio;
 
         MyHeap<Artista> artistasExitosos = new MyHeapImpl<>(false);
 
         while (!currentDate.isAfter(fin)){
-            rangeDate.add(currentDate);
-            currentDate.plusDays(1);
-        }
-
-        for (int i = 0; i < rangeDate.size(); i++) {
-            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(rangeDate.getPosition(i));
+            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate);
             Cancion tempCancion = cancionesFecha.delete().getCancion();
             MyList<Artista> artistas = tempCancion.getArtista();
 
@@ -87,13 +82,41 @@ public class Spotify{
                     artistasExitosos.insert(tempArtista);
                 }
             }
-        }
 
+            currentDate = currentDate.plusDays(1);
+        }
+        System.out.println(artistasExitosos.size());
         for (int i = 0; i < 7; i++) {
             System.out.println(artistasExitosos.delete().getNombre());
         }
+    }
+    public void cantArtistaTop50 (String date, String pais, String artista, DataLoader data) throws DatoInvalido {
+        if (date == null || pais == null){
+            throw new DatoInvalido();
+        }
+        int cantidad = 0;
+
+        for (int i = 0; i < data.getTopEntries().size(); i++) {
+            String key = pais + "|" + date + "|" + i;
+
+            MyList<Artista> artistas =  new MyLinkedListIml<>();
+
+            if (data.getTopEntries().getValue(key) != null) {
+                artistas = data.getTopEntries().getValue(key).getCancion().getArtista();
+                for (int j = 0; j < artistas.size() ; j++) {
+                    if (artistas.getPosition(j).getNombre().equals(artista)){
+                        cantidad++;
+                    }
+                }
+            }
+        }
+
+        String cantStr = String.valueOf(cantidad);
+        System.out.println("El artista " + artista + "aparece " + cantStr + "veces ");
 
     }
+
+
 
 
 }
