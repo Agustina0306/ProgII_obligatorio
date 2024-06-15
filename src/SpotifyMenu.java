@@ -60,14 +60,15 @@ public class SpotifyMenu {
                     break;
                 case 5:
                     System.out.println("Ingrese el tempo mínimo:");
-                    float minTempo = scanner.nextFloat();
+                    double minTempo = scanner.nextDouble();
                     System.out.println("Ingrese el tempo máximo:");
-                    float maxTempo = scanner.nextFloat();
+                    double maxTempo = scanner.nextDouble();
                     scanner.nextLine(); // Consumir el salto de línea
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
                     startDate = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                     endDate = scanner.nextLine();
+                    spotify.cancionesTempo(maxTempo, minTempo, startDate, endDate, data);
                     break;
                 case 0:
                     System.out.println("Saliendo...");
