@@ -16,14 +16,14 @@ public class Spotify{
 
     public void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste {
         System.out.println("Procesando...");
-        if (pais==null | fecha==null | data==null){
+        if (pais==null || fecha==null || data==null){
             throw new DatoInvalido();
         }
         if (!data.getTopEntries().contains(pais + "|"+ fecha + "|" + "1")){
             throw new DatoNoEXiste();
         }
         int i=10;
-        while(i>0){
+        while(i!=0){
 
             String j= String.valueOf(i);
             String key = pais + "|" + fecha + "|" + j;
@@ -38,7 +38,7 @@ public class Spotify{
                 nombresArtistas.append(artistas.getPosition(k).getNombre());
             }
 
-            System.out.println("Nombre Cancion: " + titulo + "Artista: "+ nombresArtistas + "Posicion: "+ j );
+            System.out.println("Nombre Cancion: " + titulo + " Artista: "+ nombresArtistas + " Posicion: "+ j );
             i--;
         }
 
@@ -103,7 +103,7 @@ public class Spotify{
         int cantidad = 0;
 
         for (int i = 0; i < data.getTopEntries().size(); i++) {
-            String key = pais + "|" + date + "|" + i;
+            String key = pais + "|" + date + "|" + "i";
 
             MyList<Artista> artistas =  new MyLinkedListIml<>();
 

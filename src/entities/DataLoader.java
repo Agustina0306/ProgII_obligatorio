@@ -71,16 +71,21 @@ public class DataLoader {
                 // Crear o recuperar los artistas y asociarlos con la canción
                 for (String artistName : artistNames) {
                     Artista artist = artistHash.insertIfAbsent(artistName, () -> new Artista(artistName));
-                    song.getArtista().add(artist);
-                    artist.getCancionesArtista().add(song);
+                    if (!song.getArtista().contains(artist)) {
+                        song.getArtista().add(artist);
+                    }
+                    if (!artist.getCancionesArtista().contains(song)) {
+                        artist.getCancionesArtista().add(song);
+                    }
                 }
 
                 // Crear y agregar la entrada Top50
                 String topEntryKey = country + "|" + date + "|" + positionStr;
-                Top50 topEntry = new Top50(country,date,song,position);
-                topEntriesHash.insert(topEntryKey,topEntry);
+//                Top50 topEntry = new Top50(country,date,song,position);
+//                topEntriesHash.insert(topEntryKey,topEntry);
+                Top50 topEntry = topEntriesHash.insertIfAbsent(topEntryKey, () -> new Top50(country, date, song, position));
 
-                if ( !top50Fecha.contains(date)) {
+                if ( !top50Fecha.contains(date) || top50Fecha.size() == 0) {
                     MyHeap<Top50> newHeap = new MyHeapImpl<>(false);
                     newHeap.insert(topEntry);
                     top50Fecha.insert(date, newHeap);
