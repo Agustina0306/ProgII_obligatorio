@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class Spotify{
 
     public void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste {
+        System.out.println("Procesando...");
         if (pais==null | fecha==null | data==null){
             throw new DatoInvalido();
         }
@@ -44,6 +45,7 @@ public class Spotify{
     }
 
     public void Top5canciones (String fecha, DataLoader data) throws DatoInvalido {
+        System.out.println("Procesando...");
         if (fecha == null){
             throw new DatoInvalido();
         }
@@ -56,15 +58,18 @@ public class Spotify{
     }
 
     public void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data) throws DatoInvalido {
-
+        System.out.println("Procesando...");
         if (fechaInicio == null || fechaFin == null || data == null){
             throw new DatoInvalido();
         }
-        // VERIFICAR FECHA INICIO > FECHA FIN
 
         LocalDate inicio = LocalDate.parse(fechaInicio);
         LocalDate fin = LocalDate.parse(fechaFin);
         LocalDate currentDate = inicio;
+
+        if (fin.isBefore(inicio)) {
+            throw new DatoInvalido();
+        }
 
         MyHeap<Artista> artistasExitosos = new MyHeapImpl<>(false);
 
@@ -91,6 +96,7 @@ public class Spotify{
         }
     }
     public void cantArtistaTop50 (String date, String pais, String artista, DataLoader data) throws DatoInvalido {
+        System.out.println("Procesando...");
         if (date == null || pais == null){
             throw new DatoInvalido();
         }
@@ -116,7 +122,40 @@ public class Spotify{
 
     }
 
+    public void cancionesTempo (double tempoMax, double tempoMin, String fechaIni, String fechaFin, DataLoader data) throws DatoInvalido {
+        System.out.println("Procesando...");
 
+        if (tempoMax == 0 || tempoMin == 0 || fechaFin == null || fechaIni == null) {
+            throw new DatoInvalido();
+        }
+
+        LocalDate inicio = LocalDate.parse(fechaIni);
+        LocalDate fin = LocalDate.parse(fechaFin);
+        LocalDate currentDate = inicio;
+        int cantCanciones = 0;
+
+        if (fin.isBefore(inicio)) {
+            throw new DatoInvalido();
+        }
+
+
+        while (!currentDate.isAfter(fin)) {
+
+            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate);
+            System.out.println(cancionesFecha.size());
+
+            for (int i = 0; i < cancionesFecha.size(); i++) {
+                Cancion tempCancion = cancionesFecha.delete().getCancion();
+                if (tempoMin <= tempCancion.getTempo() && tempCancion.getTempo() <= tempoMax) {
+                    cantCanciones++;
+            }
+
+            }
+            currentDate = currentDate.plusDays(1);
+        }
+
+        System.out.println("Hay " + cantCanciones + " canciones con un tempo en el intervalo indicado");
+    }
 
 
 }
