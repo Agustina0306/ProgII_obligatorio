@@ -44,10 +44,10 @@ public class SpotifyMenu {
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
-                    String startDate = scanner.nextLine();
+                    String startDate3 = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
-                    String endDate = scanner.nextLine();
-                    spotify.Top7ArtistasEnRango(startDate, endDate, data);
+                    String endDate3 = scanner.nextLine();
+                    spotify.Top7ArtistasEnRango(startDate3, endDate3, data);
                     break;
                 case 4:
                     System.out.println("Ingrese el artista:");
@@ -65,10 +65,10 @@ public class SpotifyMenu {
                     double maxTempo = scanner.nextDouble();
                     scanner.nextLine(); // Consumir el salto de línea
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
-                    startDate = scanner.nextLine();
+                    String startDate5 = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
-                    endDate = scanner.nextLine();
-                    spotify.cancionesTempo(maxTempo, minTempo, startDate, endDate, data);
+                    String endDate5 = scanner.nextLine();
+                    spotify.cancionesTempo(maxTempo, minTempo, startDate5, endDate5, data);
                     break;
                 case 0:
                     System.out.println("Saliendo...");
