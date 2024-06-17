@@ -115,9 +115,10 @@ public class Spotify implements SpotifyIntf{
         }
         int cantidad = 0;
 
-        for (int i = 0; i < data.getTopEntries().size(); i++) {
-            String key = pais + "|" + date + "|" + i;
+        for (int i = 1; i <= 50; i++) {
+            String k = String.valueOf(i);
 
+            String key = pais + "|" + date + "|" + k;
             MyList<Artista> artistas;
 
             if (data.getTopEntries().getValue(key) != null) {
@@ -131,9 +132,9 @@ public class Spotify implements SpotifyIntf{
         }
 
         String cantStr = String.valueOf(cantidad);
-        System.out.println("El artista " + artista + "aparece " + cantStr + "veces ");
-
+        System.out.println("El artista " + artista + " aparece " + cantStr + " veces ");
     }
+
     @Override
     public void cancionesTempo (double tempoMax, double tempoMin, String fechaIni, String fechaFin, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
