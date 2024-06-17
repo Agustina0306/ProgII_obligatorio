@@ -8,14 +8,21 @@ public class SpotifyMenu {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws DatoInvalido, DatoNoEXiste, exceptions.DatoInvalido {
+    public static void main(String[] args) throws DatoInvalido, DatoNoEXiste {
 
         Spotify spotify = new Spotify();
 
         System.out.println("Ingrese el filePath del dataSet: ");
         String path = scanner.nextLine();
         DataLoader data = new DataLoader();
-        data.loadData(path);
+        boolean cargaDatos = data.loadData(path);
+
+        while (!cargaDatos){
+            System.out.println("No se pudo encontrar el filePath ingresado, ingreselo nuevamente: ");
+            path = scanner.nextLine();
+            data = new DataLoader();
+            cargaDatos = data.loadData(path);
+        }
 
         int option;
         do {

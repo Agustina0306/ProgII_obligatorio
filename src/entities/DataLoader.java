@@ -22,7 +22,7 @@ public class DataLoader {
     private MyHash<String, Artista> artistHash = new MyClosedHash<>();
 
     private MyHash <LocalDate, MyHeap<Top50>> top50Fecha = new MyClosedHash<>();
-    public void loadData(String filePath) {
+    public boolean loadData(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int datosNumero = 0;
 
@@ -99,8 +99,10 @@ public class DataLoader {
                 }
             }
             System.out.println("Datos cargados exitosamente.");
+            return true;
         } catch (IOException e) {  // Excepcion de java que salta cuando no se puede leer correctamente el archivo
-            e.printStackTrace();
+            e.getMessage();
+            return false;
         }
     }
 
