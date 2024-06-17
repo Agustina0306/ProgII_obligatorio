@@ -2,7 +2,7 @@
 import java.util.Scanner;
 import entities.DataLoader;
 import exceptions.DatoNoEXiste;
-import tad.LinkedList.DatoInvalido;
+import exceptions.DatoInvalido;
 
 public class SpotifyMenu {
 
