@@ -3,7 +3,7 @@ import entities.Cancion;
 import entities.DataLoader;
 import entities.Top50;
 import exceptions.DatoNoEXiste;
-import tad.LinkedList.DatoInvalido;
+import exceptions.DatoInvalido;
 import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
 import tad.heap.MyHeap;

@@ -1,10 +1,10 @@
 import entities.DataLoader;
 import exceptions.DatoNoEXiste;
-import tad.LinkedList.DatoInvalido;
+import exceptions.DatoInvalido;
 
 public interface SpotifyIntf {
 
-    public void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste;
+    public void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoNoEXiste, DatoInvalido;
 
     public void Top5canciones (String fecha, DataLoader data) throws DatoInvalido;
 

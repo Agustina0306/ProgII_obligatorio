@@ -8,7 +8,7 @@ public class SpotifyMenu {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws DatoInvalido, DatoNoEXiste {
+    public static void main(String[] args) throws DatoInvalido, DatoNoEXiste, exceptions.DatoInvalido {
 
         Spotify spotify = new Spotify();
 
