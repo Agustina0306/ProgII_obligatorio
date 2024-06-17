@@ -12,8 +12,9 @@ import tad.heap.MyHeapImpl;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Spotify{
+public class Spotify implements SpotifyIntf{
 
+    @Override
     public void top10DiaPais(String pais, String fecha, DataLoader data) throws DatoInvalido, DatoNoEXiste {
         System.out.println("Procesando...");
         if (pais==null || fecha==null || data==null){
@@ -43,7 +44,7 @@ public class Spotify{
         }
 
     }
-
+    @Override
     public void Top5canciones (String fecha, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
         if (fecha == null){
@@ -56,7 +57,7 @@ public class Spotify{
         }
 
     }
-
+    @Override
     public void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
         if (fechaInicio == null || fechaFin == null || data == null){
@@ -95,6 +96,7 @@ public class Spotify{
             System.out.println(artistasExitosos.delete().getNombre());
         }
     }
+    @Override
     public void cantArtistaTop50 (String date, String pais, String artista, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
         if (date == null || pais == null){
@@ -121,7 +123,7 @@ public class Spotify{
         System.out.println("El artista " + artista + "aparece " + cantStr + "veces ");
 
     }
-
+    @Override
     public void cancionesTempo (double tempoMax, double tempoMin, String fechaIni, String fechaFin, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
 
