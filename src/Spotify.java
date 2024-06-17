@@ -60,6 +60,7 @@ public class Spotify implements SpotifyIntf{
     @Override
     public void Top7ArtistasEnRango (String fechaInicio, String fechaFin, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
+
         if (fechaInicio == null || fechaFin == null || data == null){
             throw new DatoInvalido();
         }
@@ -76,26 +77,36 @@ public class Spotify implements SpotifyIntf{
 
         while (!currentDate.isAfter(fin)){
             MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate);
-            Cancion tempCancion = cancionesFecha.delete().getCancion();
-            MyList<Artista> artistas = tempCancion.getArtista();
 
-            for (int j = 0; j < artistas.size(); j++) {
-                Artista tempArtista = artistas.getPosition(j);
-                if (artistasExitosos.search(tempArtista) != null && artistasExitosos.search(tempArtista).equals(tempArtista)) {
-                    artistasExitosos.search(tempArtista).setArtistaCounter();
-                } else {
-                    tempArtista.setArtistaCounter();
-                    artistasExitosos.insert(tempArtista);
+            if (cancionesFecha != null){
+                while (cancionesFecha.size() != 0){
+                    Cancion tempCancion = cancionesFecha.delete().getCancion();
+                    MyList<Artista> artistas = tempCancion.getArtista();
+
+                    for (int j = 0; j < artistas.size(); j++) {
+                        Artista tempArtista = artistas.getPosition(j);
+                        if (artistasExitosos.search(tempArtista) != null && artistasExitosos.search(tempArtista).equals(tempArtista)) {
+                            artistasExitosos.search(tempArtista).setArtistaCounter();
+                        } else {
+                            tempArtista.setArtistaCounter();
+                            artistasExitosos.insert(tempArtista);
+                        }
+                    }
                 }
+                currentDate = currentDate.plusDays(1);
+            } else {
+                currentDate = currentDate.plusDays(1);
             }
-
-            currentDate = currentDate.plusDays(1);
         }
         System.out.println(artistasExitosos.size());
+        if (artistasExitosos.size() == 0){
+            System.out.println("No hay datos para el rango de fechas indicado");
+        }
         for (int i = 0; i < 7; i++) {
             System.out.println(artistasExitosos.delete().getNombre());
         }
     }
+
     @Override
     public void cantArtistaTop50 (String date, String pais, String artista, DataLoader data) throws DatoInvalido {
         System.out.println("Procesando...");
@@ -105,9 +116,9 @@ public class Spotify implements SpotifyIntf{
         int cantidad = 0;
 
         for (int i = 0; i < data.getTopEntries().size(); i++) {
-            String key = pais + "|" + date + "|" + "i";
+            String key = pais + "|" + date + "|" + i;
 
-            MyList<Artista> artistas =  new MyLinkedListIml<>();
+            MyList<Artista> artistas;
 
             if (data.getTopEntries().getValue(key) != null) {
                 artistas = data.getTopEntries().getValue(key).getCancion().getArtista();
