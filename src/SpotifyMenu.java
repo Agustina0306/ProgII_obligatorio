@@ -1,4 +1,5 @@
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import entities.DataLoader;
 import exceptions.DatoNoEXiste;
@@ -24,7 +25,9 @@ public class SpotifyMenu {
             cargaDatos = data.loadData(path);
         }
 
-        int option;
+        System.out.println("\n");
+
+        int option = -1;
         do {
             System.out.println("Seleccione una opción:");
             System.out.println("1. Top 10 canciones en un país en un día dado");
@@ -33,10 +36,12 @@ public class SpotifyMenu {
             System.out.println("4. Cantidad de veces que aparece un artista en una fecha dada");
             System.out.println("5. Cantidad de canciones con un tempo en un rango específico de fechas");
             System.out.println("0. Salir");
-            option = scanner.nextInt();
-            scanner.nextLine();
 
-            switch (option) {
+            try{
+                option = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (option) {
                 case 1:
                     System.out.println("Ingrese el país:");
                     String pais = scanner.nextLine();
@@ -83,7 +88,12 @@ public class SpotifyMenu {
                 default:
                     System.out.println("Opción no válida.");
                     break;
+                }
+            } catch (InputMismatchException e){
+                System.out.println("Entrada no valida. Por favor ingrese uno de los numeros indicados en las opciones \n");
+                scanner.nextLine();
             }
+
         } while (option != 0);
 
         scanner.close();
