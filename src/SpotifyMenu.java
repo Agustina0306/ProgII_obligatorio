@@ -9,7 +9,7 @@ public class SpotifyMenu {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws DatoInvalido, DatoNoEXiste {
+    public static void main(String[] args) {
 
         Spotify spotify = new Spotify();
 
@@ -47,19 +47,40 @@ public class SpotifyMenu {
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String fecha = scanner.nextLine();
-                    spotify.top10DiaPais(pais, fecha, data);
+                    try {
+                        spotify.top10DiaPais(pais, fecha, data);
+                    } catch (DatoInvalido e){
+                        System.out.println("Asegurese de que los datos ingresados sean los correctos\n");
+                        e.getMessage();
+                    } catch (DatoNoEXiste e){
+                        System.out.println("No se encuentran resultados para el pais y fecha dados. Asegurese de que estos sean correctos\n");
+                        e.getMessage();
+                    }
                     break;
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String date = scanner.nextLine();
-                    spotify.Top5canciones(date, data);
+                    try {
+                        spotify.Top5canciones(date, data);
+                    }catch (DatoInvalido e){
+                        System.out.println("El dato ingresado no es válido");
+                        e.getMessage();
+                    }catch (DatoNoEXiste e){
+                        System.out.println("No se encontraron datos para la fecha indicada. Asegurese que esta sea correcta");
+                        e.getMessage();
+                    }
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
                     String startDate3 = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                     String endDate3 = scanner.nextLine();
-                    spotify.Top7ArtistasEnRango(startDate3, endDate3, data);
+                    try{
+                        spotify.Top7ArtistasEnRango(startDate3, endDate3, data);
+                    } catch (DatoInvalido e){
+                        System.out.println("Alguno de los datos ingresados no es correcto. Asegurese de que lo sea");
+                        e.getMessage();
+                    }
                     break;
                 case 4:
                     System.out.println("Ingrese el artista:");
@@ -68,7 +89,15 @@ public class SpotifyMenu {
                     String date4 = scanner.nextLine();
                     System.out.println("Ingrese un pais: ");
                     String pais4 = scanner.nextLine();
-                    spotify.cantArtistaTop50(date4,  pais4, artist, data);
+                    try{
+                        spotify.cantArtistaTop50(date4,  pais4, artist, data);
+                    }catch (DatoInvalido e){
+                        System.out.println("Los datos ingresados son invalidos. Asegurese de que sean correctos");
+                        e.getMessage();
+                    } catch (DatoNoEXiste e){
+                        System.out.println("El artista ingresado no existe");
+                        e.getMessage();
+                    }
                     break;
                 case 5:
                     System.out.println("Ingrese el tempo mínimo:");
@@ -80,7 +109,13 @@ public class SpotifyMenu {
                     String startDate5 = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                     String endDate5 = scanner.nextLine();
-                    spotify.cancionesTempo(maxTempo, minTempo, startDate5, endDate5, data);
+                    try {
+                        spotify.cancionesTempo(maxTempo, minTempo, startDate5, endDate5, data);
+                    } catch (DatoInvalido e){
+                        System.out.println("Los datos ingresados son invalidos. Asegurese de que sean correctos");
+                        e.getMessage();
+                    }
+
                     break;
                 case 0:
                     System.out.println("Saliendo...");
