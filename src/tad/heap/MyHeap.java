@@ -19,5 +19,7 @@ public interface MyHeap<T extends Comparable<T>> {
 	int size();
 
 	T search (T element);
+
+	MyHeapImpl<T> clone();
 	
 }

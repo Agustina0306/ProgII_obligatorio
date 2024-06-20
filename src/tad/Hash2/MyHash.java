@@ -22,4 +22,6 @@ public interface MyHash<K,V> {
 
     V getValue (K key);
 
+    MyHash<K, V> clone();
+
 }

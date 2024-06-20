@@ -58,6 +58,10 @@ public class Top50 implements Comparable<Top50>{
         this.counter++;
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
     @Override
     public int compareTo(Top50 o) {
         if (this.counter > o.counter){

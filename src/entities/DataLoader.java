@@ -87,13 +87,15 @@ public class DataLoader {
 
                 if ( !top50Fecha.contains(date) || top50Fecha.size() == 0) {
                     MyHeap<Top50> newHeap = new MyHeapImpl<>(false);
+                    topEntry.setCounter();
                     newHeap.insert(topEntry);
                     top50Fecha.insert(date, newHeap);
                 } else {
                     MyHeap<Top50> heap = top50Fecha.getValue(date);
                     if (heap.search(topEntry) != null && heap.search(topEntry).getCancion().equals(song)){
-                        topEntry.setCounter();
+                        heap.search(topEntry).setCounter();
                     } else{
+                        topEntry.setCounter();
                         heap.insert(topEntry);
                     }
                 }

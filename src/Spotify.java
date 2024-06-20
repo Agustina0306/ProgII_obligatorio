@@ -4,6 +4,7 @@ import entities.DataLoader;
 import entities.Top50;
 import exceptions.DatoNoEXiste;
 import exceptions.DatoInvalido;
+import tad.LinkedList.MyLinkedListIml;
 import tad.LinkedList.MyList;
 import tad.heap.MyHeap;
 import tad.heap.MyHeapImpl;
@@ -63,9 +64,10 @@ public class Spotify implements SpotifyIntf{
             throw new DatoNoEXiste();
         }
 
-        MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(date);
+        MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(date).clone();
         for (int i = 0; i < 5 ; i++) {
-            System.out.println(cancionesFecha.delete().getCancion().getTitulo());
+            Top50 temp = cancionesFecha.delete();
+            System.out.println(temp.getCancion().getTitulo());
         }
 
     }
@@ -96,11 +98,12 @@ public class Spotify implements SpotifyIntf{
         LocalDate currentDate = inicio;
 
         while (!currentDate.isAfter(fin)){
-            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate);
+            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate).clone();
 
             if (cancionesFecha != null){
                 while (cancionesFecha.size() != 0){
-                    Cancion tempCancion = cancionesFecha.delete().getCancion();
+                    Top50 tempVar = cancionesFecha.delete();
+                    Cancion tempCancion = tempVar.getCancion();
                     MyList<Artista> artistas = tempCancion.getArtista();
 
                     for (int j = 0; j < artistas.size(); j++) {
@@ -120,8 +123,10 @@ public class Spotify implements SpotifyIntf{
         if (artistasExitosos.size() == 0){
             System.out.println("No hay datos para el rango de fechas indicado");
         }
+
         for (int i = 0; i < 7; i++) {
-            System.out.println(artistasExitosos.delete().getNombre());
+            Artista temp = artistasExitosos.delete();
+            System.out.println(temp.getNombre());
         }
     }
 
@@ -188,7 +193,7 @@ public class Spotify implements SpotifyIntf{
 
         while (!currentDate.isAfter(fin)) {
 
-            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate);
+            MyHeap<Top50> cancionesFecha = data.getTop50Fecha().getValue(currentDate).clone();
 
             for (int i = 0; i < cancionesFecha.size(); i++) {
                 Cancion tempCancion = cancionesFecha.delete().getCancion();
@@ -202,6 +207,5 @@ public class Spotify implements SpotifyIntf{
 
         System.out.println("Hay " + cantCanciones + " canciones con un tempo en el intervalo indicado");
     }
-
 
 }

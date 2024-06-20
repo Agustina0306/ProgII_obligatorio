@@ -166,11 +166,22 @@ public class MyClosedHash <K,V> implements MyHash<K,V> {
     }
 
     @Override
+    public MyClosedHash<K, V> clone() {
+        MyClosedHash<K, V> clonedHash = new MyClosedHash<>();
+        for (int i = 0; i < capacity; i++) {
+            if (table[i] != null && !table[i].isDeleted) {
+                clonedHash.insert(table[i].key, table[i].value);
+            }
+        }
+        return clonedHash;
+    }
+
+    @Override
     public MyList<Entry<K, V>> getTable() {
         MyList<Entry<K, V>> entries = new MyLinkedListIml<>();
         for (int i = 0; i < capacity; i++) {
             if (table[i] != null && !table[i].isDeleted) {
-                entries.add(table[i]);
+                entries.add(new Entry<>(table[i].key, table[i].value));
             }
         }
         return entries;

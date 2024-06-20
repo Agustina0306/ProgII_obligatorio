@@ -1,5 +1,7 @@
 package tad.heap;
 
+import java.util.Arrays;
+
 public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
 
 	private static final int CAPACITY = 2;
@@ -143,6 +145,14 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public MyHeapImpl<T> clone() {
+		MyHeapImpl<T> clonedHeap = new MyHeapImpl<>(this.heap.length - 1, this.isHeapMin);
+		clonedHeap.size = this.size;
+		clonedHeap.heap = Arrays.copyOf(this.heap, this.heap.length);
+		return clonedHeap;
 	}
 
 }
