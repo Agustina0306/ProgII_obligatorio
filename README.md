@@ -15,11 +15,11 @@ En la funcion 4 asumimos que como decia "un top50 especifico"entones era para un
 Cuando generamos el Hash con los datos del DataSet, hay datos que despereciamos ya que no eran necesarios para las funciones.
 
 
-El consumo de memoria total es de 5,85 GB
-5,592 GB son usado en generar un hash con los daos, y arreglar el tema de cuando una cancion tiene mas de un artista y separa por comillas.
-27,35 MB cuando instacio una canciòn y la agrego al Hash.
-21,51MB asociar un artista a una cancion y crearlo (verfificcar que no lo tiene).
-98,86MB crear y agregar a Top50
-4,18MB newHeap
+El consumo de memoria total es de 5,96 GB
+5,73 GB son usado en generar un hash con los datos, y arreglar el tema de cuando una cancion tiene mas de un artista y separa por comillas.
+33,07 MB cuando instacio una canciòn y la agrego al Hash.
+10,31MB asociar un artista a una cancion y crearlo (verfificcar que no lo tiene).
+167,72MB crear y agregar a Top50
+6,29MB newHeap
 
 
